@@ -2,7 +2,6 @@ package com.mrj.learningportal.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +44,7 @@ public class CourseController {
 		
 		if(courses != null && !courses.isEmpty())
 		{
-			List<CourseResponseDto> courseresp = courses.stream().map(courseService::mapCourseEntitytoCourseDto).collect(Collectors.toList());
+			List<CourseResponseDto> courseresp = courses.stream().map(courseService::mapCourseEntitytoCourseDto).toList();
 			return ResponseEntity.status(HttpStatus.OK).body(courseresp);
 		}
 		logger.info("@CourseController - Failed to fetch all courses.");
@@ -103,7 +102,7 @@ public class CourseController {
 			courseresp.setName(course.getName());
 			courseresp.setDesc(course.getDesc());
 			courseresp.setCategory(course.getCategoryEntity().getName());
-			courseresp.setEnrolledUsers(course.getEnrolledUsers().stream().map(func -> func.getCourseEntity().getName()).collect(Collectors.toList()));
+			courseresp.setEnrolledUsers(course.getEnrolledUsers().stream().map(func -> func.getCourseEntity().getName()).toList());
 			courseresp.setEnrolledUserCount(courseresp.getEnrolledUsers().size());
 			logger.info("@CourseController - Course found.");
 			return ResponseEntity.status(HttpStatus.FOUND).body(courseresp);

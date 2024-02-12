@@ -1,0 +1,17 @@
+server:
+ port: 8081
+
+spring:
+ security:
+  oauth2:
+   client:
+    registration:
+     authentication-demo:
+      client-id: authentication-demo
+      client-secret: u0hl8oKtrCe2ZufQXkjrUs5FMfdFTvE1
+      scope: openid, profile, roles
+      authorization-grant-type: authorization_code
+      redirect-uri: http://localhost:8080/login/oauth2/code/authentication-demo
+    provider:
+     authentication-demo:
+      issuer-uri: http://localhost:8080/realms/Test

@@ -2,7 +2,6 @@ package com.mrj.learningportal.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +67,7 @@ public class CourseServiceImpl implements CourseService{
 		course.setAuthor(courseEntity.getAuthor());
 		course.setCategory(courseEntity.getCategoryEntity().getName());
 		course.setDesc(courseEntity.getDesc());
-		course.setEnrolledUsers(courseEntity.getEnrolledUsers().stream().map(pred -> pred.getUserEntity().getName()).collect(Collectors.toList()));
+		course.setEnrolledUsers(courseEntity.getEnrolledUsers().stream().map(pred -> pred.getUserEntity().getName()).toList());
 		course.setEnrolledUserCount(course.getEnrolledUsers().size());
 		return course;
 	}

@@ -2,7 +2,6 @@ package com.mrj.learningportal.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,8 +87,8 @@ public class RegistrationServiceImpl implements RegistrationService{
 	public List<CourseResponseDto> findEnrolledCoursesByUser(UserEntity userEntity) {
 		logger.info("@RegistrationServiceImpl - Finding courses enrolled by user.");
 		List<RegistrationEntity> registrations = registrationRepository.findByUserEntity(userEntity);
-		List<CourseEntity> courses = registrations.stream().map(registration -> registration.getCourseEntity()).collect(Collectors.toList());
-		return courses.stream().map(courseService::mapCourseEntitytoCourseDto).collect(Collectors.toList());
+		List<CourseEntity> courses = registrations.stream().map(registration -> registration.getCourseEntity()).toList();
+		return courses.stream().map(courseService::mapCourseEntitytoCourseDto).toList();
 	}
 
 	@Override

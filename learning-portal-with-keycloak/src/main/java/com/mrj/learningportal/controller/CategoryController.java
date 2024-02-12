@@ -2,7 +2,6 @@ package com.mrj.learningportal.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +58,7 @@ public class CategoryController {
 		}
 		CategoryEntity categoryEntity = category.get();
 		List<CourseEntity> courses = courseService.findCourseByCategory(categoryEntity);
-		List<CourseResponseDto> courseresp = courses.stream().map(courseService::mapCourseEntitytoCourseDto).collect(Collectors.toList());
+		List<CourseResponseDto> courseresp = courses.stream().map(courseService::mapCourseEntitytoCourseDto).toList();
 		return ResponseEntity.status(HttpStatus.OK).body(courseresp);
 	}
 }

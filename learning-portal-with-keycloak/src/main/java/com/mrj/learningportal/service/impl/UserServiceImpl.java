@@ -2,7 +2,6 @@ package com.mrj.learningportal.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,12 +53,12 @@ public class UserServiceImpl implements UserService{
 	    userDto.setRole(userEntity.getRole());
 	    if(userEntity.getEnrolledCourses() != null)
 	    {
-	    	userDto.setEnrolledCourses(userEntity.getEnrolledCourses().stream().map(registration -> courseService.mapCourseEntitytoCourseDto(registration.getCourseEntity())).collect(Collectors.toList()));
+	    	userDto.setEnrolledCourses(userEntity.getEnrolledCourses().stream().map(registration -> courseService.mapCourseEntitytoCourseDto(registration.getCourseEntity())).toList());
 	    }
 	    if(userEntity.getFavouriteCourses() != null)
 	    {
-	    	List<CourseEntity> courses = userEntity.getFavouriteCourses().stream().map(pred -> pred.getCourseFavEntity()).collect(Collectors.toList());
-	    	userDto.setFavoriteCourses(courses.stream().map(courseService::mapCourseEntitytoCourseDto).collect(Collectors.toList()));
+	    	List<CourseEntity> courses = userEntity.getFavouriteCourses().stream().map(pred -> pred.getCourseFavEntity()).toList();
+	    	userDto.setFavoriteCourses(courses.stream().map(courseService::mapCourseEntitytoCourseDto).toList());
 	    }
 	    return userDto;
 	}

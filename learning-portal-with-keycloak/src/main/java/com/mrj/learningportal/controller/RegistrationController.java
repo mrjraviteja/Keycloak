@@ -2,7 +2,6 @@ package com.mrj.learningportal.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +35,7 @@ public class RegistrationController {
 		List<RegistrationEntity> registrations = registrationService.findAllRegistrations();
 		if(!registrations.isEmpty())
 		{
-			List<RegistrationResponseDto> registrationsresp = registrations.stream().map(registrationService::mapRegistrationEntitytoDto).collect(Collectors.toList());
+			List<RegistrationResponseDto> registrationsresp = registrations.stream().map(registrationService::mapRegistrationEntitytoDto).toList();
 			return ResponseEntity.status(HttpStatus.FOUND).body(registrationsresp);
 		}
 		else

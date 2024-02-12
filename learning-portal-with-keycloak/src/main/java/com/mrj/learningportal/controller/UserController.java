@@ -2,7 +2,6 @@ package com.mrj.learningportal.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +46,7 @@ public class UserController {
 	{
 		logger.info("@UserController - Fetching all user details.");
 		List<UserEntity> users = userService.findAllUsers();
-		List<UserResponseDto> userresp = users.stream().map(userService::userEntitytoDtoMapper).collect(Collectors.toList());
+		List<UserResponseDto> userresp = users.stream().map(userService::userEntitytoDtoMapper).toList();
 		return ResponseEntity.status(HttpStatus.OK).body(userresp);
 		
 	}
@@ -88,8 +87,8 @@ public class UserController {
 			userresp.setName(user.getName());
 			userresp.setRole(user.getRole());
 			userresp.setEnrolledCourses(registrationService.findEnrolledCoursesByUser(user));
-			List<CourseEntity> courses = user.getFavouriteCourses().stream().map(pred -> pred.getCourseFavEntity()).collect(Collectors.toList());
-			userresp.setFavoriteCourses(courses.stream().map(courseService::mapCourseEntitytoCourseDto).collect(Collectors.toList()));
+			List<CourseEntity> courses = user.getFavouriteCourses().stream().map(pred -> pred.getCourseFavEntity()).toList();
+			userresp.setFavoriteCourses(courses.stream().map(courseService::mapCourseEntitytoCourseDto).toList());
 			logger.info("@UserController - User found!");
 			return ResponseEntity.status(HttpStatus.FOUND).body(userresp);
 		}
@@ -152,8 +151,8 @@ public class UserController {
 					userresp.setName(user.getName());
 					userresp.setRole(user.getRole());
 					userresp.setEnrolledCourses(registrationService.findEnrolledCoursesByUser(user));
-					List<CourseEntity> courses = user.getFavouriteCourses().stream().map(pred -> pred.getCourseFavEntity()).collect(Collectors.toList());
-					userresp.setFavoriteCourses(courses.stream().map(courseService::mapCourseEntitytoCourseDto).collect(Collectors.toList()));
+					List<CourseEntity> courses = user.getFavouriteCourses().stream().map(pred -> pred.getCourseFavEntity()).toList();
+					userresp.setFavoriteCourses(courses.stream().map(courseService::mapCourseEntitytoCourseDto).toList());
 					logger.info("@UserController - User enrolled in the course.");
 					return ResponseEntity.status(HttpStatus.ACCEPTED).body(userresp);
 				}
@@ -170,8 +169,8 @@ public class UserController {
 					userresp.setName(user.getName());
 					userresp.setRole(user.getRole());
 					userresp.setEnrolledCourses(registrationService.findEnrolledCoursesByUser(user));
-					List<CourseEntity> courses = user.getFavouriteCourses().stream().map(pred -> pred.getCourseFavEntity()).collect(Collectors.toList());
-					userresp.setFavoriteCourses(courses.stream().map(courseService::mapCourseEntitytoCourseDto).collect(Collectors.toList()));
+					List<CourseEntity> courses = user.getFavouriteCourses().stream().map(pred -> pred.getCourseFavEntity()).toList();
+					userresp.setFavoriteCourses(courses.stream().map(courseService::mapCourseEntitytoCourseDto).toList());
 					logger.info("@UserController - User enrolled in the course.");
 					return ResponseEntity.status(HttpStatus.ACCEPTED).body(userresp);
 				}

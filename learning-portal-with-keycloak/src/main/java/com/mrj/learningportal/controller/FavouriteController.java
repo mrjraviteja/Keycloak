@@ -1,7 +1,6 @@
 package com.mrj.learningportal.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +35,7 @@ public class FavouriteController {
 			logger.info("@CategoryController - Failed to fetch favourites.");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No favourites found!");
 		}
-		List<FavouriteResponseDto> favouritesresp = favourites.stream().map(favouriteService::mapFavouriteEntitytoDto).collect(Collectors.toList());
+		List<FavouriteResponseDto> favouritesresp = favourites.stream().map(favouriteService::mapFavouriteEntitytoDto).toList();
 		return ResponseEntity.status(HttpStatus.OK).body(favouritesresp);
 	}
 }
