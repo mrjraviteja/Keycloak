@@ -3,37 +3,24 @@ logging:
  level: 
   org.springframework: INFO
   org.springframework.security: DEBUG
-  
-spring:
- application:
-  name: multitenancy-keycloak
- security:
-  oauth2:
-   resourceserver:
-    jwt:
-      issuer-uri: http://localhost:8080/realms/customer1
-      jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
-      
+
 multitenancy:
   realms:
     - name: customer1
       issuer-uri: http://localhost:8080/realms/customer1
       jwk-set-uri: ${multitenancy.realms[0].issuer-uri}/protocol/openid-connect/certs
+      resource-id: customer-1
+      principal-attribute: preferred_username
     - name: customer2
       issuer-uri: http://localhost:8080/realms/customer2
       jwk-set-uri: ${multitenancy.realms[1].issuer-uri}/protocol/openid-connect/certs
+      resource-id: customer-2
+      principal-attribute: preferred_username
     - name: customer3
       issuer-uri: http://localhost:8080/realms/customer3
       jwk-set-uri: ${multitenancy.realms[2].issuer-uri}/protocol/openid-connect/certs
-    
-
-
-     
-jwt:
- auth:
-  converter:
-   resource-id: customer-1
-   principal-attribute: preferred_username
+      resource-id: customer-3
+      principal-attribute: preferred_username
    
 server:
  port: 8081
